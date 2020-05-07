@@ -585,7 +585,8 @@ function backup(options) {
     metadata: Boolean(opt.metadata)
   };
   if (my.tar && !my.stream) {
-    my.stream = fs.createWriteStream(path.join(my.root, my.tar));
+    var filePath = path.isAbsolute(my.tar) ? my.tar : path.join(my.root, my.tar);
+    my.stream = fs.createWriteStream(filePath);
   }
   if (my.stream) {
     my.tar = true; // override
